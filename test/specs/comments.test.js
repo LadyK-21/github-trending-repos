@@ -24,10 +24,14 @@ describe('comments', function () {
   });
 
   it('should strip mentions from repo desc', () => {
-    assert.equal(stripMentionsFromRepoDesc('Repo desc [maintainer=@abc]'), 'Repo desc');
-    assert.equal(stripMentionsFromRepoDesc('Repo desc 2 [maintainer=@abc,@xx]'), 'Repo desc 2');
-    assert.equal(stripMentionsFromRepoDesc('Repo desc [maintainer=@abc] 11'), 'Repo desc  11');
-    assert.equal(stripMentionsFromRepoDesc('Repo desc maintainer'), 'Repo desc maintainer');
+    assert.equal(stripMentionsFromRepoDesc('Repo desc [maintainer=@abc]'), 'Repo desc [maintainer=`@abc`]');
+    assert.equal(stripMentionsFromRepoDesc('Repo desc 2 @abc,@xx]'), 'Repo desc 2 `@abc`,`@xx`]');
+    assert.equal(stripMentionsFromRepoDesc('Repo desc [maintainer=@abc] 11'), 'Repo desc [maintainer=`@abc`] 11');
+    assert.equal(stripMentionsFromRepoDesc('Repo desc @user'), 'Repo desc `@user`');
+    assert.equal(stripMentionsFromRepoDesc('@user is the maintainer'), '`@user` is the maintainer');
+    
+    // negative
+    assert.equal(stripMentionsFromRepoDesc('email me at user@gmail.com'), 'email me at user@gmail.com');
   });
 
 });

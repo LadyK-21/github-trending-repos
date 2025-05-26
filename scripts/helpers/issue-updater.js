@@ -116,8 +116,9 @@ module.exports = class IssueUpdater {
 
   /**
    * See: https://github.com/vitalets/github-trending-repos/issues/170
+   * See: https://github.com/vitalets/github-trending-repos/issues/186
    */
   static stripMentionsFromRepoDesc(desc) {
-    return (desc || '').replace(/\[maintainer=@.+\]/g, '').trim();
+    return (desc || '').replace(/(^|[^a-z0-9])@([a-z0-9-]+)/ig, '$1`@$2`').trim();
   }
 };
