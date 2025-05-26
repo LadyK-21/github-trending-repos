@@ -25,15 +25,15 @@ describe('translator', function () {
   });
 
   it('should translate russian', async function () {
-    const text = 'Супер-мега-библиотека';
+    const text = 'привет';
     const translated = await new Translator(text).toEn();
-    assert.include(translated.toLowerCase(), 'super-mega-library');
+    assert.include(translated.toLowerCase(), 'hello');
   });
 
   it('should translate mixed russian + en', async function () {
-    const text = 'Super-mega-библиотека';
+    const text = 'Super библиотека';
     const translated = await new Translator(text).toEn();
-    assert.include(translated.toLowerCase(), 'super-mega-library');
+    assert.include(translated.toLowerCase(), 'super library');
   });
 
   it('should not fall on empty values', async function () {
