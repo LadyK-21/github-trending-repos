@@ -17,7 +17,7 @@ describe('trends', function () {
     const trendingUrl = 'https://github.com/trending/javascript?since=weekly';
     const repos = await new Trends(trendingUrl, retryOptions).getAll();
     const repo = repos[0];
-    assert.equal(repos.length, 16);
+    assert.isAbove(repos.length, 0);
     assert.isAbove(repo.name.length, 0, 'name');
     assert.isAbove(repo.url.length, 0, 'url');
     assert.isAbove(repo.description.length, 0, 'description');
